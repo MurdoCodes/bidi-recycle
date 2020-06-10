@@ -13,74 +13,137 @@ function pluginURL(){
 /** Function To add product on the list **/
 function addElement(elem){
 	event.preventDefault();
-	// Get button value
+	// Get item id
 	var id = $(elem).attr("value");
-	// Get Value of items on the modal product list
-	var modal_product_imgSrc = $('#modal_product_image_' + id).attr('src');
-	var modal_product_name = $('#modal_product_name_' + id).html();
-	var modal_product_order_id = $('#modal_order_id_' + id).val();
-	var modal_product_order_item_id = $('#modal_order_item_id_' + id).val();
 	var modal_product_productQty = $('#modal_productQty_' + id).val();
-	// Storing value in array
-	countQty.push(modal_product_productQty);
-	
-	// Sum all the quantity in the array
-	// If statement
-	if(eval(countQty.join('+')) < 10){
 
-		appendSingleProduct(id, modal_product_order_id, modal_product_order_item_id, modal_product_imgSrc, modal_product_name, modal_product_productQty);
-
-	}else if(eval(countQty.join('+')) > 10){
-		
-		$.confirm({
-		    title: '<style="">Warning!',
-		    content: 'Maximum Number of Product Quantity Reached. Limited to 10 Products. Please add the exact quantity. Product Quantity Count if Item Is Added : ' + + eval(countQty.join('+')),
-		    buttons: {
-		        Ok: function () {
-		        	countQty.splice(-1,1)
-		        }
-		    }
-		});		
-
-	}else if(eval(countQty.join('+')) == 10){
-
-		appendSingleProduct(id, modal_product_order_id, modal_product_order_item_id, modal_product_imgSrc, modal_product_name, modal_product_productQty);
-		
+	// check if qty is null else proceed
+	if(modal_product_productQty == ''){
 
 		$.confirm({
-		    title: 'You already added 10 Bidi Sticks!',
-		    content: 'You can only recycle ' + + eval(countQty.join('+')) + ' Bidi Sticks at a time.',
+		    title: 'Warning!',
+		    content: 'You are only allowed to add atleast 1 Bidi Stick!',
 		    buttons: {
 		        Ok: function () {
-		        	$('.modalButton').prop('disabled', true);
-					$('#recycle-submit').removeAttr("disabled");
 		        }
 		    }
 		});
 
+	}else{
+
+		// Get Value of items on the modal product list
+		var modal_product_imgSrc = $('#modal_product_image_' + id).attr('src');
+		var modal_product_name = $('#modal_product_name_' + id).html();
+		var modal_product_order_id = $('#modal_order_id_' + id).val();
+		var modal_product_order_item_id = $('#modal_order_item_id_' + id).val();
+		var modal_product_productQty = $('#modal_productQty_' + id).val();
+		// Storing value in array
+		countQty.push(modal_product_productQty);
+		
+		// Sum all the quantity in the array
+		totalProdQty = eval(countQty.join('+'));
+		alert(totalProdQty);
+		// If statement
+		if(totalProdQty < 30){
+
+			appendSingleProduct(id, modal_product_order_id, modal_product_order_item_id, modal_product_imgSrc, modal_product_name, modal_product_productQty);
+			if(totalProdQty == 30){
+				appendSingleProduct(id, modal_product_order_id, modal_product_order_item_id, modal_product_imgSrc, modal_product_name, modal_product_productQty);			
+
+				$.confirm({
+				    title: 'You already added ' + totalProdQty +' Bidi Sticks!',
+				    content: 'You can only recycle ' + totalProdQty + ' Bidi Sticks at a time.',
+				    buttons: {
+				        Ok: function () {
+				        	$('.modalButton').prop('disabled', true);
+							$('#recycle-submit').removeAttr("disabled");
+				        }
+				    }
+				});
+			}
+			if( totalProdQty == 10 || totalProdQty == 20 ){
+
+				appendSingleProduct(id, modal_product_order_id, modal_product_order_item_id, modal_product_imgSrc, modal_product_name, modal_product_productQty);			
+
+				$.confirm({
+				    title: 'You already added ' + totalProdQty +' Bidi Sticks!',
+				    content: 'You can now proceed your recycle with a total of ' + totalProdQty + ' Bidi Stick or add more',
+				    buttons: {
+				        Ok: function () {
+							$('#recycle-submit').removeAttr("disabled");
+				        }
+				    }
+				});
+
+			}else if( totalProdQty > 11 && totalProdQty < 19 ){
+
+				$.confirm({
+				    title: '<style="">Warning!',
+				    content: 'You are not allowed to add items in between 11 up to 19. Current Product Quantity Count : ' + totalProdQty + '. Please add more',
+				    buttons: {
+				        Ok: function () {
+				        	countQty.splice(-1,1)
+				        	$('#recycle-submit').attr('disabled', 'disabled');
+				        }
+				    }
+				});	
+
+			}else if( totalProdQty > 21 && totalProdQty < 29 ){
+
+				$.confirm({
+				    title: '<style="">Warning!',
+				    content: 'You are not allowed to add items in between 21 up to 29. Current Product Quantity Count : ' + totalProdQty + '. Please add more',
+				    buttons: {
+				        Ok: function () {
+				        	countQty.splice(-1,1)
+				        	$('#recycle-submit').attr('disabled', 'disabled');
+				        }
+				    }
+				});	
+
+			}
+
+		}else if( totalProdQty > 30 ){
+			
+			$.confirm({
+			    title: '<style="">Warning!',
+			    content: 'Maximum Number of Product Quantity Reached. Limited to 30 Products. Please add the exact quantity. Product Quantity Count if Item Is Added : ' + totalProdQty,
+			    buttons: {
+			        Ok: function () {
+			        	countQty.splice(-1,1)
+			        }
+			    }
+			});		
+
+		}
+		
+		// Delete item on the product list
+	    $("#buttonDelete_"+ id).click(function(){
+
+	    	// Get Value of items on the product list
+			var product_order_id = $('#order_id_' + id).val();
+			var product_order_item_id = $('#order_item_id_' + id).val();
+			var product_imgSrc = $('#product_img_' + id).attr('src');
+			var product_name = $('#product_name_' + id).html();
+			var product_productQty = $('#productQty_' + id).val();
+
+			// Get the index number of the product to delete
+			var index = countQty.indexOf(product_productQty);
+			if (index !== -1) countQty.splice(index, 1);
+
+			// Append deleted product in modal
+			appendModalProduct(id, product_order_id, product_order_item_id, product_imgSrc, product_name, product_productQty);
+
+			if( totalProdQty != 10 || totalProdQty != 20 || totalProdQty !=30 ){
+				alert("test");
+			}
+			// Remove modal attribute disabled
+	    	$('.modalButton').removeAttr("disabled");
+	    	$('#recycle-submit').attr('disabled', 'disabled');
+
+		});
+
 	}
-	
-	// Delete item on the product list
-    $("#buttonDelete_"+ id).click(function(){
-
-    	// Get Value of items on the product list
-		var product_order_id = $('#order_id_' + id).val();
-		var product_order_item_id = $('#order_item_id_' + id).val();
-		var product_imgSrc = $('#product_img_' + id).attr('src');
-		var product_name = $('#product_name_' + id).html();
-		var product_productQty = $('#productQty_' + id).val();
-
-		// Get the index number of the product to delete
-		var index = countQty.indexOf(product_productQty);
-		if (index !== -1) countQty.splice(index, 1);
-
-		// Append deleted product in modal
-		appendModalProduct(id, product_order_id, product_order_item_id, product_imgSrc, product_name, product_productQty);
-
-		// Remove modal attribute disabled
-    	$('.modalButton').removeAttr("disabled");
-
-	});
 
 }
 
@@ -225,31 +288,16 @@ function getModalProdQty(e){
 	$('input.modal_productQty').on('input',function(e){
 		e.preventDefault();
 	 	var value = parseInt($( this ).val());
-
-	 	if(value > modalValue){
-			$(this).val(modalValue);
+	 	if(value == -1 || value == 0){
+	 		$(this).val('0');
 	 		$.confirm({
 			    title: 'Warning!',
-			    content: 'You cannot exceed more than ' + modalValue + ' quantity',
+			    content: 'You cannot add less than 0 quantity',
 			    buttons: {
 			        Ok: function () {
 			        }
 			    }
 			});
-
-	 	}
-
-	 	if(value == 0){
-			$(this).val('1');
-	 		$.confirm({
-			    title: 'Warning!',
-			    content: 'You cannot add less than 1 quantity',
-			    buttons: {
-			        Ok: function () {
-			        }
-			    }
-			});
-
 	 	}
 	});
 	
