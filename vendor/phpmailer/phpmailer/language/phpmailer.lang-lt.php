@@ -4,6 +4,7 @@
  * @package PHPMailer
  * @author Dainius Kaupaitis <dk@sum.lt>
  */
+
 $PHPMAILER_LANG['authenticate']         = 'SMTP klaida: autentifikacija nepavyko.';
 $PHPMAILER_LANG['connect_host']         = 'SMTP klaida: nepavyksta prisijungti prie SMTP stoties.';
 $PHPMAILER_LANG['data_not_accepted']    = 'SMTP klaida: duomenys nepriimti.';

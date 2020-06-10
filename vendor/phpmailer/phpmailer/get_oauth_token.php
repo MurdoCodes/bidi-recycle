@@ -27,6 +27,7 @@
  * If no refresh token is obtained when running this file,
  * revoke access to your app and run the script again.
  */
+
 namespace PHPMailer\PHPMailer;
 
 /**

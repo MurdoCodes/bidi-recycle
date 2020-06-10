@@ -17,7 +17,9 @@
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE.
  */
+
 namespace PHPMailer\PHPMailer;
+
 /**
  * PHPMailer RFC821 SMTP email transport class.
  * Implements RFC 821 SMTP commands and provides some utility methods for sending mail to an SMTP server.
@@ -32,7 +34,7 @@ class SMTP
      *
      * @var string
      */
-    const VERSION = '6.1.5';
+    const VERSION = '6.1.6';
 
     /**
      * SMTP line break constant.
@@ -1166,7 +1168,7 @@ class SMTP
             //Must pass vars in here as params are by reference
             if (!stream_select($selR, $selW, $selW, $this->Timelimit)) {
                 $this->edebug(
-                    'SMTP -> get_lines(): timed-out (' . $this->Timeout . ' sec)',
+                    'SMTP -> get_lines(): select timed-out in (' . $this->Timelimit . ' sec)',
                     self::DEBUG_LOWLEVEL
                 );
                 break;
@@ -1185,7 +1187,7 @@ class SMTP
             $info = stream_get_meta_data($this->smtp_conn);
             if ($info['timed_out']) {
                 $this->edebug(
-                    'SMTP -> get_lines(): timed-out (' . $this->Timeout . ' sec)',
+                    'SMTP -> get_lines(): stream timed-out (' . $this->Timeout . ' sec)',
                     self::DEBUG_LOWLEVEL
                 );
                 break;
