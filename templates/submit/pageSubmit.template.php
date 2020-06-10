@@ -73,22 +73,7 @@ if(isset($_POST)){
 	$DeliveryDate = $rates['DeliveryDate'];
 	$MaxAmount = $rates['MaxAmount'];
 	// STAMPS END
-
-	// AUTHORIZE.NET START
-	$creditCardNumber = $_POST['creditCardNumber'];
-	$card_exp_month = $_POST['card_exp_month'];
-	$card_cvc = $_POST['card_cvc'];
-
-	$cardDetails = array(
-		'card-number' => $creditCardNumber,
-		'year-month' => $card_exp_month,
-		'card-cvc' => $card_cvc
-	);
-
-	if($cardDetails){
-		$AuthorizeService->chargeCreditCard($cardDetails, $MaxAmount, $customer_id, $from_firstname, $from_lastName, $from_email, $from_phone_number, $from_address, $from_city, $from_state, $from_postcode, $from_country);
-	}
-	// AUTHORIZE.NET END	
+	
 	$count = count($product_order_id);
 	
 	// Insert Return Information Data from the form to wp_bidi_return_information table

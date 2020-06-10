@@ -305,26 +305,6 @@ function getModalProdQty(e){
 
 
 $(function() {
-	/** START DATE PICKER **/
-	$('#card_exp_month').datepicker( {
-		changeMonth: true,
-		changeYear: true,
-		showButtonPanel: true,
-		dateFormat: 'yy-mm',
-		minDate: 0,
-		onClose: function(dateText, inst) { 
-			$(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
-		}
-	});
-	$("#card_exp_month").focus(function () {
-        $(".ui-datepicker-calendar").hide();
-        $("#ui-datepicker-div").position({
-            my: "center top",
-            at: "center bottom",
-            of: $(this)
-        });
-    });
-	/** END DATE PICKER **/
     /** Start Front End Form Submission **/
 	    // Hide Loader
 		$("#loader").hide();

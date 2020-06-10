@@ -175,7 +175,7 @@ use Includes\StampsAPI\Address;
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="ShippingFullName">Full Name :</label>
-									<p>BIDICARES RETURNS</p>
+									<p>BIDI CARES</p>
 								</div>
 
 								<div class="form-group">
@@ -192,34 +192,16 @@ use Includes\StampsAPI\Address;
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="ShippingStreetAddress">Address :</label>
-									<p>8630 SW Scholls Ferry Rd Suite 3333</p>
-									<p>Beaverton</p>
-									<p>Oregon</p>
-									<p>97008</p>
+									<p>BIDI CARES</p>
+									<p>4460 OLD DIXIE HWY</p>
+									<p>GRANT</p>
+									<p>Florida, 32949</p>
 								</div>
 							</div>
 
 						</div>
 						<div class="col-md-4">
-							<h4 style="color:#fff;font-weight: bold;">Card Details : </h4>
 							<div class="col-md-12">
-								<div class="form-group">
-									<label for="creditCardNumber">Card Number:</label>
-									<input type="number" class="form-control" id="creditCardNumber" name="creditCardNumber" maxlength="16" autocomplete="off">
-								</div>
-								<div class="form-group">
-									<label for="ExpirationDate">Expiry Date:</label>
-									<input type="text" class="form-control" id="card_exp_month" name="card_exp_month">									
-								</div>
-								<div class="form-group">
-									<label for="returnedRate">CVC CODE:</label>
-									<input type="number" class="form-control" id="card_cvc" name="card_cvc" maxlength="4" autocomplete="off">
-								</div>
-								<div class="form-group">
-									<label for="returnedRate">Amount:</label>
-									<p class="returnedRate"></p>
-								</div>
-
 								<div class="form-group">
 									<button type="submit" name="submit" class="form-control btn btn-success btn-lg" id="recycle-submit" disabled>Confirm Recycle</button>
 								</div>
