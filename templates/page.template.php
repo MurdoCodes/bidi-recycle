@@ -55,7 +55,7 @@ use Includes\StampsAPI\Address;
 					</header>
 
 					<hr>
-
+					<p>COUNT : <span class="modal-front-qty" style="padding-left: 1em;padding-right: 1em;padding-top: .2em;padding-bottom: .2em;background-color:#fff;color:#000;" ></span></p>
 					<div class="content" id="product-scroll-bar">
 						<!-- Append Products Here -->
 					</div>
@@ -228,6 +228,7 @@ use Includes\StampsAPI\Address;
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Select Product</h4>
+        <p>Current Product Added : <span class="modal-front-qty"></span>
       </div>
 
       <div class="modal-body">

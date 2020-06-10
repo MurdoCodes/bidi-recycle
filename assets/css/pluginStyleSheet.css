@@ -12,7 +12,7 @@
 .product-list #buttonModal{height: 3em !important;margin-top: -1% !important;}
 .product-list, .user-details {max-height: 60em !important;height: 60em !important;}
 .product-list header{padding:0 !important;display: flex !important;  justify-content: space-between !important;margin-bottom:1em !important;}
-.product-list .content{max-height: 50em !important;height: 50em !important;overflow: scroll !important;overflow-x: hidden !important;padding: 1em !important;}
+.product-list .content{max-height: 48em !important;height: 48em !important;overflow: scroll !important;overflow-x: hidden !important;padding: 1em !important;}
 .product-list .single-product{margin-bottom:.5em !important;}
 .product-list .flex{display: flex !important;justify-content: flex-start !important;}
 .product-list img{width: 25% !important;padding: .1em !important;border: .01em solid #ccc !important;}

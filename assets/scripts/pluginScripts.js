@@ -1,5 +1,6 @@
 // Set array to count modal product quantity
 var countQty = [];
+var countQty2 = [];
 var countItemQty = [];
 $(".content").niceScroll();
 $(".modal-body").niceScroll();
@@ -42,13 +43,13 @@ function addElement(elem){
 		
 		// Sum all the quantity in the array
 		totalProdQty = eval(countQty.join('+'));
-		alert(totalProdQty);
+		
+		$(".modal-front-qty").html(totalProdQty);
 		// If statement
-		if(totalProdQty < 30){
+		if(totalProdQty <= 30){
 
 			appendSingleProduct(id, modal_product_order_id, modal_product_order_item_id, modal_product_imgSrc, modal_product_name, modal_product_productQty);
-			if(totalProdQty == 30){
-				appendSingleProduct(id, modal_product_order_id, modal_product_order_item_id, modal_product_imgSrc, modal_product_name, modal_product_productQty);			
+			if(totalProdQty == 30){	
 
 				$.confirm({
 				    title: 'You already added ' + totalProdQty +' Bidi Sticks!',
@@ -61,9 +62,7 @@ function addElement(elem){
 				    }
 				});
 			}
-			if( totalProdQty == 10 || totalProdQty == 20 ){
-
-				appendSingleProduct(id, modal_product_order_id, modal_product_order_item_id, modal_product_imgSrc, modal_product_name, modal_product_productQty);			
+			if( totalProdQty == 10 || totalProdQty == 20 ){		
 
 				$.confirm({
 				    title: 'You already added ' + totalProdQty +' Bidi Sticks!',
@@ -75,31 +74,31 @@ function addElement(elem){
 				    }
 				});
 
-			}else if( totalProdQty > 11 && totalProdQty < 19 ){
+			}else if( totalProdQty >= 11 && totalProdQty <= 19 ){
+				$('#recycle-submit').attr('disabled', 'disabled');
+				// $.confirm({
+				//     title: '<style="">Warning!',
+				//     content: 'You are not allowed to add items in between 11 up to 19. Current Product Quantity Count : ' + totalProdQty + '. Please add more',
+				//     buttons: {
+				//         Ok: function () {
+				//         	// countQty.splice(-1,1)
+				//         	$('#recycle-submit').attr('disabled', 'disabled');
+				//         }
+				//     }
+				// });	
 
-				$.confirm({
-				    title: '<style="">Warning!',
-				    content: 'You are not allowed to add items in between 11 up to 19. Current Product Quantity Count : ' + totalProdQty + '. Please add more',
-				    buttons: {
-				        Ok: function () {
-				        	countQty.splice(-1,1)
-				        	$('#recycle-submit').attr('disabled', 'disabled');
-				        }
-				    }
-				});	
-
-			}else if( totalProdQty > 21 && totalProdQty < 29 ){
-
-				$.confirm({
-				    title: '<style="">Warning!',
-				    content: 'You are not allowed to add items in between 21 up to 29. Current Product Quantity Count : ' + totalProdQty + '. Please add more',
-				    buttons: {
-				        Ok: function () {
-				        	countQty.splice(-1,1)
-				        	$('#recycle-submit').attr('disabled', 'disabled');
-				        }
-				    }
-				});	
+			}else if( totalProdQty >= 21 && totalProdQty <= 29 ){
+				$('#recycle-submit').attr('disabled', 'disabled');
+				// $.confirm({
+				//     title: '<style="">Warning!',
+				//     content: 'You are not allowed to add items in between 21 up to 29. Current Product Quantity Count : ' + totalProdQty + '. Please add more',
+				//     buttons: {
+				//         Ok: function () {
+				//         	// countQty.splice(-1,1)
+				//         	$('#recycle-submit').attr('disabled', 'disabled');
+				//         }
+				//     }
+				// });	
 
 			}
 
@@ -107,10 +106,11 @@ function addElement(elem){
 			
 			$.confirm({
 			    title: '<style="">Warning!',
-			    content: 'Maximum Number of Product Quantity Reached. Limited to 30 Products. Please add the exact quantity. Product Quantity Count if Item Is Added : ' + totalProdQty,
+			    content: 'Maximum Number of Product Quantity Reached. Limited to 30 Products. Please add the exact quantity. Current Product Quantity Count : ' + totalProdQty,
 			    buttons: {
 			        Ok: function () {
-			        	countQty.splice(-1,1)
+			        	totalProdQty = totalProdQty - countQty.splice(-1,1);
+			        	$(".modal-front-qty").html(totalProdQty);
 			        }
 			    }
 			});		
@@ -129,18 +129,33 @@ function addElement(elem){
 
 			// Get the index number of the product to delete
 			var index = countQty.indexOf(product_productQty);
-			if (index !== -1) countQty.splice(index, 1);
+			var minus = countQty.splice(index, 1);
+			if (index !== -1) minus;
 
 			// Append deleted product in modal
 			appendModalProduct(id, product_order_id, product_order_item_id, product_imgSrc, product_name, product_productQty);
 
-			if( totalProdQty != 10 || totalProdQty != 20 || totalProdQty !=30 ){
-				alert("test");
-			}
-			// Remove modal attribute disabled
-	    	$('.modalButton').removeAttr("disabled");
-	    	$('#recycle-submit').attr('disabled', 'disabled');
+			// insert all value in an array
+			countQty2.push(product_productQty);
+			// add all value inside the array
+			totalProdQty2 = eval(countQty2.join('+'));
+			// Subtract all product qty to the countQty2 ang get the current total qty inside product list
+			var allTotal = totalProdQty - totalProdQty2;
 
+			if( allTotal == 10 || allTotal == 20 || allTotal == 30){
+				$('#recycle-submit').removeAttr("disabled");
+				$(".modal-front-qty").html(allTotal);
+			}else if(allTotal == 0){
+				totalProdQty = 0;
+				countQty2 = [];
+				totalProdQty2 = 0;
+				$(".modal-front-qty").html(totalProdQty);
+			}else{
+				$(".modal-front-qty").html(allTotal);
+				$('#recycle-submit').attr('disabled', 'disabled');
+		    	$('.modalButton').removeAttr("disabled");
+			}
+			
 		});
 
 	}

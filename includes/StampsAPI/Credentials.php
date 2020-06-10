@@ -14,17 +14,17 @@ class Credentials {
         /**
         * DEVELOPMENT CREDENTIALS        
         **/
-            // $this->IntegrationID = "a560af9f-8c5c-4546-969c-6f6d0111401a";
-            // $this->Username = "Kaival-001";
-            // $this->Password = "May2020!";
+            $this->IntegrationID = "a560af9f-8c5c-4546-969c-6f6d0111401a";
+            $this->Username = "Kaival-001";
+            $this->Password = "May2020!";
 		
 
         /**
         * PRODUCTION CREDENTIALS
         **/  
-            $this->IntegrationID = "a560af9f-8c5c-4546-969c-6f6d0111401a";
-            $this->Username = "emosser-4460ol";
-            $this->Password = "#Melbourne121";
+            // $this->IntegrationID = "a560af9f-8c5c-4546-969c-6f6d0111401a";
+            // $this->Username = "emosser-4460ol";
+            // $this->Password = "#Melbourne121";
             
     }
 }

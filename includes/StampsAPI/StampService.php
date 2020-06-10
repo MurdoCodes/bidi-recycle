@@ -11,12 +11,12 @@ class StampService {
     /** 
     * Development URL
     **/  
-    // private const URL = "https://swsim.testing.stamps.com/swsim/swsimv90.asmx?wsdl";
+    private const URL = "https://swsim.testing.stamps.com/swsim/swsimv90.asmx?wsdl";
 
     /**
     * Production URL
     **/
-    private const URL = "https://swsim.stamps.com/swsim/swsimv90.asmx?wsdl";
+    // private const URL = "https://swsim.stamps.com/swsim/swsimv90.asmx?wsdl";
     
     private $soapClient;
     private $authenticator;
