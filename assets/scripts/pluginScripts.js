@@ -12,6 +12,7 @@ function pluginURL(){
 }
 
 function returnStampsValue(totalItemQty){
+	$("#loader").show();
 	var fixedItemWeight = 0.5;
     var totalItemWeight = totalItemQty * fixedItemWeight;
 
@@ -61,6 +62,7 @@ function returnStampsValue(totalItemQty){
 
 			$('input[name=ShipDate]').val(response.ShipDate);
 			$(".ShipDate").html(response.ShipDate);
+			$("#loader").hide();
 	    },
 	     error: function(xhr, status, error){	     	
 	         var errorMessage = xhr.status + ': ' + xhr.statusText
@@ -70,7 +72,11 @@ function returnStampsValue(totalItemQty){
 
 }
 
-$(function() {	
+$(function() {
+	/** Start Stamps Calculation Via Dropdown Value **/
+	$("#bidistick_qty").change(function() {
+	  returnStampsValue(this.value)
+	});	
     /** Start Front End Form Submission **/
 	    // Hide Loader
 		$("#loader").hide();

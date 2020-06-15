@@ -16,14 +16,14 @@ class DBModel{
 			
 	}
 	// Insert return information to the database
-	function insertReturnInformation($total_prod_qty, $current_date, $return_status, $customer_id, $TrackingNumber){
-		$table = $this->wpdb->prefix . 'bidi_return_information';
+	function insertReturnInformation($transaction_date, $transaction_store, $transaction_item_qty, $transaction_tracking_number, $transaction_image_url, $transaction_status, $customer_id){
+		$table = $this->wpdb->prefix . 'bidi_recycle_transaction';
 		$sql = $this->wpdb->prepare(
 			"INSERT INTO `" . $table . "`      
-			(`return_id`, `return_total_qty_returned`, `return_date`, `return_item_status`, `customer_id`, `shipping_tracking_number`) 
+			(`return_id`, `transaction_date`, `transaction_store`, `transaction_item_qty`, `transaction_tracking_number`, `transaction_image_url`, `transaction_status`, `customer_id`) 
 			values
-			(%d, %s, %s, %s, %s, %s)",
-			NULL, $total_prod_qty, $current_date, $return_status, $customer_id, $TrackingNumber
+			(%d, %s, %s, %s, %s, %s, %s, %s)",
+			NULL, $transaction_date, $transaction_store, $transaction_item_qty, $transaction_tracking_number, $transaction_image_url, $transaction_status, $customer_id
  		);
 		if($this->wpdb->query($sql)){
 			return array($this->wpdb->insert_id);
@@ -32,37 +32,37 @@ class DBModel{
 	}
 
 	// Insert Shipping Information
-	function insertShippingInformation($TrackingNumber, $StampsTxID, $postageURL, $ShipDate, $DeliveryDate, $MaxAmount, $return_id){
+	// function insertShippingInformation($TrackingNumber, $StampsTxID, $postageURL, $ShipDate, $DeliveryDate, $MaxAmount, $return_id){
 
-		$table = $this->wpdb->prefix . 'bidi_return_shipping_info';
-		$sql = $this->wpdb->prepare(
-			"INSERT INTO `" . $table . "`      
-			(`shipping_id`, `shipping_tracking_number`, `shipping_stamps`, `shipping_postage_url`, `shipping_date`, `shipping_delivery_day`, `shipping_rate`, `return_id`) 
-			values
-			(%d, %s, %s, %s, %s, %s, %s, %s)",
-			NULL, $TrackingNumber, $StampsTxID, $postageURL, $ShipDate, $DeliveryDate, $MaxAmount, $return_id
- 		);
-		if($this->wpdb->query($sql)){
-			return array($this->wpdb->insert_id);
-		}
+	// 	$table = $this->wpdb->prefix . 'bidi_return_shipping_info';
+	// 	$sql = $this->wpdb->prepare(
+	// 		"INSERT INTO `" . $table . "`      
+	// 		(`shipping_id`, `shipping_tracking_number`, `shipping_stamps`, `shipping_postage_url`, `shipping_date`, `shipping_delivery_day`, `shipping_rate`, `return_id`) 
+	// 		values
+	// 		(%d, %s, %s, %s, %s, %s, %s, %s)",
+	// 		NULL, $TrackingNumber, $StampsTxID, $postageURL, $ShipDate, $DeliveryDate, $MaxAmount, $return_id
+ // 		);
+	// 	if($this->wpdb->query($sql)){
+	// 		return array($this->wpdb->insert_id);
+	// 	}
 
-	}
+	// }
 
 	// Insert return product list and information
-	function insertProductInformation($product_name, $product_qty, $product_order_id, $product_item_id, $product_image, $current_date, $return_id, $TrackingNumber){
-		$table = $this->wpdb->prefix . 'bidi_return_product_info';
-		$sql = $this->wpdb->prepare(
-			"INSERT INTO `" . $table . "`      
-			(`product_info_id`, `product_name`, `product_qty`, `product_order_id`, `product_item_id`, `product_image`, `product_return_date`, `return_id`, `shipping_tracking_number`) 
-			values
-			(%d, %s, %s, %d, %d, %s, %s, %d, %s)",
-			NULL, $product_name, $product_qty, $product_order_id, $product_item_id, $product_image, $current_date, $return_id, $TrackingNumber
- 		);
-		if($this->wpdb->query($sql)){
-			return "Success";
-		}
+	// function insertProductInformation($product_name, $product_qty, $product_order_id, $product_item_id, $product_image, $current_date, $return_id, $TrackingNumber){
+	// 	$table = $this->wpdb->prefix . 'bidi_return_product_info';
+	// 	$sql = $this->wpdb->prepare(
+	// 		"INSERT INTO `" . $table . "`      
+	// 		(`product_info_id`, `product_name`, `product_qty`, `product_order_id`, `product_item_id`, `product_image`, `product_return_date`, `return_id`, `shipping_tracking_number`) 
+	// 		values
+	// 		(%d, %s, %s, %d, %d, %s, %s, %d, %s)",
+	// 		NULL, $product_name, $product_qty, $product_order_id, $product_item_id, $product_image, $current_date, $return_id, $TrackingNumber
+ // 		);
+	// 	if($this->wpdb->query($sql)){
+	// 		return "Success";
+	// 	}
 
-	}
+	// }
 
 	// Get All Data from two tables wp_bidi_return_information and wp_users
 	function getAllReturnAndUserData(){

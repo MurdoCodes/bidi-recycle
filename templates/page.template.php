@@ -35,192 +35,138 @@ use Includes\StampsAPI\Address;
 	$billing_state = $user_meta['billing_state'][0];
 
 ?>
-<!-- <form method="POST" action="<?php //echo $this->plugin_url . 'templates/submit/pageSubmit.template.php'; ?>"> -->
- <form id="form-recycle" method="POST">
-	<input type="hidden" name="current_user_id" value="<?php echo get_current_user_id(); ?>" >
-	<div class="container">
-		<div class="row">
-				<div class="col-md-12">
-					<h2 style="text-align:center;">BIDI CARES RECYCLING MOVEMENT</h2>
-    				<h4 style="text-align:center;"><b>Are you ready to help save the environment?</b> Bidi Cares is our sustainable initiative where you can get involved simply by returning your used Bidi Sticks. As a token of appreciation for your eco-friendly decision, we give you a <b>FREE</b> Bidi Stick at your next purchase for every 10 used Bidi Stick you ship back to us. </br></br>After collecting your 10 used Bidi Sticks, fill out the form below, pay for the shipping fee, and we will send you the return label. Kindly return the Bidi Sticks only. Do not include the whole packaging to avoid return label cost differences on actual shipment.</br></br></h4>
-				</div>
-				<div class="col-md-12 user-details default-container-border">
-					<header>
-						<h1 style="font-size:2.222em !important;line-height: 1 !important;">CONTACT DETAILS</h1>
-					</header>
-					
-					<hr>
-
-					<div class="content col-md-12">
-						<div class="col-md-6">
-							<div class="form-group">
-						    	<label for="firstName">First Name:</label>
-						    	<input type="text" class="form-control" name="from_firstname" value="<?php echo $billing_first_name; ?>" placeholder="<?php echo $billing_first_name; ?>" readonly>
-						  	</div>
-
-						  	<div class="form-group">
-						    	<label for="lastName">Last Name:</label>
-						    	<input type="text" class="form-control" name="from_lastName" value="<?php echo $billing_last_name; ?>" placeholder="<?php echo $billing_last_name; ?>" readonly>
-						  	</div>
-
-						  	<div class="form-group">
-						    	<label for="email">Email Address:</label>
-						    	<input type="email" class="form-control" name="from_email" value="<?php echo $billing_email; ?>" placeholder="<?php echo $billing_email; ?>" readonly>
-						  	</div>
-							
-							<div class="form-group">
-						    	<label for="email">Address:</label>
-						    	<input type="text" class="form-control" name="from_address" value="<?php echo $billing_address_1; ?>" placeholder="<?php echo $billing_address_1; ?>" readonly>
-						  	</div>
-
-
-						  	<div class="form-group">
-						    	<label for="note">Phone :</label>
-						    	<input type="text" class="form-control" name="from_phone_number" value="<?php echo $billing_phone; ?>" placeholder="<?php echo $billing_phone; ?>" readonly>
-						  	</div>
-
-						  	<div class="form-group">
-						    	<label for="country">Country:</label>
-						    	<input type="text" class="form-control" name="from_country" value="<?php echo $billing_country; ?>" placeholder="<?php echo $billing_country; ?>" readonly>
-						  	</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-						    	<label for="postcode">Postcode:</label>
-						    	<input type="text" class="form-control" name="from_postcode" value="<?php echo $billing_postcode; ?>" placeholder="<?php echo $billing_postcode; ?>" readonly>
-						  	</div>
-
-							<div class="form-group">
-						    	<label for="city">City:</label>
-						    	<input type="text" class="form-control" name="from_city" value="<?php echo $billing_city; ?>" placeholder="<?php echo $billing_city; ?>" readonly>
-						  	</div>
-
-						  	<div class="form-group">
-						    	<label for="state">State:</label>
-						    	<input type="text" class="form-control" name="from_state" value="<?php echo $billing_state; ?>" placeholder="<?php echo $billing_state; ?>" readonly>
-						  	</div>
-							
-						  	<div class="form-group">
-								<label for="storeLocatorPicker">Type In or Select Store :</label>
-								<select class="selectpicker form-control" data-live-search="true">
-									<option>Select Store</option>
-								    <?php
-										global $wpdb;
-										$stores = $wpdb->get_results ( "
-										    SELECT * 
-										    FROM  $wpdb->posts
-										        WHERE post_type = 'wpsl_stores'
-										" );
-
-										foreach ( $stores as $store )									{
-										   echo '<option data-tokens="'.$store->post_name.'">'.$store->post_name.'</option>';
-										}
-									?>
-									<option data-tokens="Others">Others</option>
-								</select>
-							</div>
-
-							<div class="form-group">
-							  <label for="sel1">Quantity of Sticks to return :</label>
-							  <select class="form-control" id="bidistick_qty" name="bidistick_qty">
-							    <option value="0">SELECT</option>
-							    <option value="10">10</option>
-							    <option value="20">20</option>
-							    <option value="30">30</option>
-							  </select>
-							</div>
-						</div>					
-					</div>
-				</div>
+<div class="container" id="bidi-recycle-container">
+	<div class="row">
+		<div class="col-md-4">
+			<h1 style="color:#80bb42; font-weight:600;" class="padding-top-60">Return Your Used	Bidi™ Sticks</h1>
+			<p>Let’s take care of the environment together. Join our recycling program today!</p>
+			<p>
+			Simply return your used Bidi Sticks to us, and we will take care of the rest. For every ten (10) used Bidi Sticks that you recycle, we will send you one (1) FREE Bidi Stick back as a form of gratitude for participating in our cause to help the environment!
+			</p>
+			<p>Fill out this form below for us to generate a return label for you to use in shipping your used Bidi Sticks.</p>
 		</div>
+		
+		<div class="col-md-8">
+			<div class="container-form ">
+			    <!-- <form method="POST" action="<?php //echo $this->plugin_url . 'templates/submit/pageSubmit.template.php'; ?>"> -->
+	 			<form id="form-recycle" method="POST">
+	 				<input type="hidden" name="current_user_id" value="<?php echo get_current_user_id(); ?>" >
 
-
-		<div class="row" style="margin-top:.5em;">
-			<div class="col-md-12 mail-return default-container-border">
-				<header>
-					<h3>Shipping Details : </h3>
-					<p style="color:#fff;margin-bottom: 1% !important;margin-bottom:1% !important;"><em>Kindly double check you added the correct products above and that your contact information is up to date. If all information is correct, fill in your card information so you can proceed with the shipping payment, and help save our planet.</em></p>
-					<input type="hidden" class="form-control" id="totalItemWeight" name="totalItemWeight" value="">
-				</header>
-				
-				<hr>
-				<div class="content col-md-12">
-					<div class="col-md-3">
-						
-						<h4 style="color:#fff;font-weight: bold;">Package Details</h4>
-						<div class="col-md-12">
-							<div class="form-group">
-								<label for="serviceType">Service Type:</label>
-								<p class="serviceType"></p>
-							</div>
-
-							<div class="form-group">
-								<label for="totalItemWeight">Total Item Weight in oz:</label>
-								<p class="totalItemWeight"></p>
-							</div>
-
-							<div class="form-group">
-								<label for="returnedRate">Amount:</label>
-								<p class="returnedRate"></p>
-							</div>
-
-							<div class="form-group">
-								<label for="ShipDate">Ship Date:</label>
-								<p class="ShipDate"></p>
-							</div>
-
-							<div class="form-group">
-								<label for="DeliverDays">Deliver Days:</label>
-								<p class="DeliverDays"></p>
-							</div>
+					<div class="row">
+						<div class="input-container col-md-6">
+							<label for="fname">First Name</label>
+							<input type="text" class="form-control" id="fname" name="from_firstname" value="<?php echo $billing_first_name; ?>" placeholder="<?php echo $billing_first_name; ?>" readonly>
 						</div>
-
-					</div>
-					<div class="col-md-5">
-
-						<h4 style="color:#fff;font-weight: bold;">Ship To : </h4>
-
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="ShippingFullName">Full Name :</label>
-								<p>BIDI CARES</p>
-							</div>
-
-							<div class="form-group">
-								<label for="ShippingEmail">Email :</label>
-								<p><a href="mailto:support@bidivapor.com" style="color:#fff;"><b>support@bidivapor.com</b></a></p>
-							</div>
-
-							<div class="form-group">
-								<label for="ShippingPhone">Phone :</label>
-								<p>(833) 367-2434</p>
-							</div>
-						</div>
-
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="ShippingStreetAddress">Address :</label>
-								<p>BIDI CARES</p>
-								<p>4460 OLD DIXIE HWY</p>
-								<p>GRANT</p>
-								<p>Florida, 32949</p>
-							</div>
-						</div>
-
-					</div>
-					<div class="col-md-4">
-						<div class="col-md-12">
-							<div class="form-group">
-								<button type="submit" name="submit" class="form-control btn btn-success btn-lg" id="recycle-submit" disabled>Confirm Recycle</button>
-							</div>
+						<div class="input-container col-md-6">
+							<label for="lname">Last Name</label>
+							<input type="text" class="form-control" id="lname" name="from_lastName" value="<?php echo $billing_last_name; ?>" placeholder="<?php echo $billing_last_name; ?>" readonly>
 						</div>
 					</div>
-				</div>				
+
+					<div class="row">
+						<div class="input-container col-md-6">
+							<label for="email">Email</label>
+							<input type="email" class="form-control" id="email" name="from_email" value="<?php echo $billing_email; ?>" placeholder="<?php echo $billing_email; ?>" readonly>
+						</div>
+						<div class="input-container col-md-6">
+							<label for="phone">Phone</label>
+							<input type="text" class="form-control" id="phone" name="from_phone_number" value="<?php echo $billing_phone; ?>" placeholder="<?php echo $billing_phone; ?>" readonly>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-container col-md-6">
+							<label for="addressNo">Address</label>
+							<input type="text" class="form-control" id="addressNo" name="from_address" value="<?php echo $billing_address_1; ?>" placeholder="<?php echo $billing_address_1; ?>" readonly>
+						</div>
+						<div class="input-container col-md-6">
+							<label for="addressCity">City</label>
+							<input type="text" class="form-control" id="addressCity" name="from_city" value="<?php echo $billing_city; ?>" placeholder="<?php echo $billing_city; ?>" readonly>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-container col-md-6">
+							<label for="country-state">US State</label>
+							<input type="text" class="form-control" id="country-state" name="from_state" value="<?php echo $billing_state; ?>" placeholder="<?php echo $billing_state; ?>" readonly>
+						</div>
+						<div class="input-container col-md-6">
+							<label for="addressZC">Zip Code</label>
+							<input type="text" class="form-control" id="addressZC" name="from_postcode" value="<?php echo $billing_postcode; ?>" placeholder="<?php echo $billing_postcode; ?>" readonly>
+						</div>
+					</div>
+					<div class="input-container margin-top-16">
+						<label for="storeLocatorPicker">Type In or Select Store :</label>
+						<select class="selectpicker form-control" data-live-search="true" name="store_locator">
+							<option>Select Store</option>
+						    <?php
+								global $wpdb;
+								$stores = $wpdb->get_results ( "
+								    SELECT * 
+								    FROM  $wpdb->posts
+								        WHERE post_type = 'wpsl_stores'
+								" );
+								var_dump($stores);		
+								foreach ( $stores as $store )									{
+								   echo '<option data-tokens="'.$store->post_title.'">'.$store->post_title.'</option>';
+								}
+							?>
+							<option data-tokens="Others">Others</option>
+						</select>
+					</div>
+					<div class="input-container margin-top-16">
+						<label for="bidistick_qty">Quantity of Bidi Sticks you want to recycle</label>
+						<select class="form-control" id="bidistick_qty" name="bidistick_qty">
+							<option value="0">SELECT</option>
+							<option value="10">10</option>
+							<option value="20">20</option>
+							<option value="30">30</option>
+						</select>
+					</div>
+
+					<div class="input-container margin-top-16">
+						<fieldset>
+							<legend>Shipping Details:</legend>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="serviceType">Service Type:</label>
+									<p class="serviceType"></p>
+								</div>
+
+								<div class="form-group">
+									<label for="totalItemWeight">Total Item Weight in oz:</label>
+									<p class="totalItemWeight"></p>
+								</div>
+
+								<div class="form-group">
+									<label for="returnedRate">Amount:</label>
+									<p class="returnedRate"></p>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="ShipDate">Ship Date:</label>
+									<p class="ShipDate"></p>
+								</div>
+
+								<div class="form-group">
+									<label for="DeliverDays">Deliver Days:</label>
+									<p class="DeliverDays"></p>
+								</div>
+							</div>
+						</fieldset>
+					</div>
+
+					<div class="input-container margin-top-16">
+						<label for="note">Note</label>
+						<textarea id="note" class="form-control" name="note" placeholder="Enter your note" style="height:200px"></textarea>
+					</div>
+					<div class="input-container" style="text-align:center;">
+						<input class="margin-top-25" id="recycle-submit" style=" text-transform: uppercase; font-weight: 600" type="submit" value="Submit Details now" disabled>
+					</div>
+			  	</form>
 			</div>	
-		</div>
-
+		</div>	
 	</div>
-</form>
+</div>
 
 <div id="loader"></div>
 <?php 

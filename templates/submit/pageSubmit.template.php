@@ -17,35 +17,30 @@ require "../../vendor/autoload.php";
 require_once( dirname (dirname(dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) ) . '/wp-load.php' );
 
 if(isset($_POST)){
-	// $SubmitModel = new DBModel();
-	// $StampService = new StampService();
-	// $CustomerOrderObj = new CustomerOrder();
-	// $AuthorizeService = new AuthorizeNetService();
+	var_dump($_POST);
+	$SubmitModel = new DBModel();
+	$StampService = new StampService();
+	$CustomerOrderObj = new CustomerOrder();
+	$AuthorizeService = new AuthorizeNetService();
 
-	// $product_name = $_POST['product_name'];
-	// $product_order_id = $_POST['order_id'];
-	// $product_item_id = $_POST['order_item_id'];
-	// $product_image = $_POST['product_img'];
-	// $product_qty = $_POST['product_qty'];
-	// $totalQty = $_POST['product_qty'][0];
+	$customer_id = $_POST['current_user_id'];
 
-	// $total_prod_qty = array_sum($product_qty);	
-	// $current_date = date('Y-m-d h:i:sa', strtotime("now"));
-	// $return_status = "wc-completed";
-	// $customer_id = $_POST['current_user_id'];
+	$from_firstname = $_POST['from_firstname'];
+	$from_lastName = $_POST['from_lastName'];
+	$customerFullName = $from_firstname . " " . $from_lastName;
 
-	// $from_firstname = $_POST['from_firstname'];
-	// $from_lastName = $_POST['from_lastName'];
-	// $customerFullName = $from_firstname . " " . $from_lastName;
-	// $from_email = $_POST['from_email'];
-	// $from_address = $_POST['from_address'];
-	// $from_phone_number = $_POST['from_phone_number'];
-	// $from_country = $_POST['from_country'];
-	// $from_postcode = $_POST['from_postcode'];
-	// $from_city = $_POST['from_city'];
-	// $from_state = $_POST['from_state'];
+	$from_email = $_POST['from_email'];
+	$from_address = $_POST['from_address'];
+	$from_phone_number = $_POST['from_phone_number'];
+	$from_country = $_POST['from_country'];
+	$from_postcode = $_POST['from_postcode'];
+	$from_city = $_POST['from_city'];
+	$from_state = $_POST['from_state'];
+	$note = $_POST['note'];
 
-	// $totalItemWeight = $_POST['totalItemWeight'];
+	
+	$store_locator = $_POST['store_locator'];
+	$totalItemWeight = $_POST['bidistick_qty'];	
 	
 	// STAMPS START
 	// $address = new Address(
@@ -76,13 +71,13 @@ if(isset($_POST)){
 
 	// var_dump($generateShippingLabel);
 
-	$postageURL = 'https://swsim.testing.stamps.com/Label/Label3.ashx/label-200.png?AQAAAJTVbiboDdgIkUByHv41U40bWYLYmjlab8LDSVd4nG1SO2zTUBQ9jh2aOmmdqCUIEGCIFD4t6vMn_jSl1LXd1sKJq-e0EKhoGRACgYhgY2BDgoq5LKBOnZsJxIaoxAjKlgUGBBMSU9fKvBCQKsGR7nLvufccnffcm5N4X1uNngVtZ7N8bHev-vPR5vba1srzOX_j5f17XGHmyFUA13vVnkDpQwscUMZp8FAxAFQgiFKvV30zLnUzh8BzWhEC0ji4muaSBCCGGl8JOtyBpgh4RWxN6dyTNbbxBylA3QYUVVNaH0V5-NrD-W_Trz6Pfa99bR-99eLE69tfOuWRt8WVxzdGf-zeyXYfeBLuZjayHPi0YuuaNYohoOVUIaTOMWmbVQNCMgZ-uCdOiEZ0WyOKMY3jPPZBY8wpZuACqxmIzBwsCNxFZD4JzBEG_xJNDOQxCSFzmG2MI19iuRVmAy9wHerHMvUbS7QeJ0ly0jI0IseX5dhdiMIwlud8Spsy9eS44csaAxIMzvrOsk8bUT0V0bRtEmIJhqEqosXmhqnqmj4BXnAJsQvgRUvRdV2p2Jpxvq8seU498MPQl72I1nzKdCXVMOW5MKJ-3WVtylRyCw4N_Wa8HDBmatHpZyUotqbuO0nYQ4rgT-2s6yr5bWVn3dYJURTFsu2KoRNTZxPNqGTBF_8_yYGXluLFWG5Qx70U1Ofl0hA7m2ff4t2e2cl1n470wz3LpBjO_Mv_Baveils=';
+	// $postageURL = 'https://swsim.testing.stamps.com/Label/Label3.ashx/label-200.png?AQAAAJTVbiboDdgIkUByHv41U40bWYLYmjlab8LDSVd4nG1SO2zTUBQ9jh2aOmmdqCUIEGCIFD4t6vMn_jSl1LXd1sKJq-e0EKhoGRACgYhgY2BDgoq5LKBOnZsJxIaoxAjKlgUGBBMSU9fKvBCQKsGR7nLvufccnffcm5N4X1uNngVtZ7N8bHev-vPR5vba1srzOX_j5f17XGHmyFUA13vVnkDpQwscUMZp8FAxAFQgiFKvV30zLnUzh8BzWhEC0ji4muaSBCCGGl8JOtyBpgh4RWxN6dyTNbbxBylA3QYUVVNaH0V5-NrD-W_Trz6Pfa99bR-99eLE69tfOuWRt8WVxzdGf-zeyXYfeBLuZjayHPi0YuuaNYohoOVUIaTOMWmbVQNCMgZ-uCdOiEZ0WyOKMY3jPPZBY8wpZuACqxmIzBwsCNxFZD4JzBEG_xJNDOQxCSFzmG2MI19iuRVmAy9wHerHMvUbS7QeJ0ly0jI0IseX5dhdiMIwlud8Spsy9eS44csaAxIMzvrOsk8bUT0V0bRtEmIJhqEqosXmhqnqmj4BXnAJsQvgRUvRdV2p2Jpxvq8seU498MPQl72I1nzKdCXVMOW5MKJ-3WVtylRyCw4N_Wa8HDBmatHpZyUotqbuO0nYQ4rgT-2s6yr5bWVn3dYJURTFsu2KoRNTZxPNqGTBF_8_yYGXluLFWG5Qx70U1Ofl0hA7m2ff4t2e2cl1n470wz3LpBjO_Mv_Baveils=';
 
-	$TrackingNumber = '9400111899564074420365';
+	// $TrackingNumber = '9400111899564074420365';
 
-	$postaggeLabelImageUrl = savePostageLabelImage($postageURL, $TrackingNumber);
+	// $postaggeLabelImageUrl = savePostageLabelImage($postageURL, $TrackingNumber);
 
-	echo $postaggeLabelImageUrl;
+	// echo $postaggeLabelImageUrl;
 	// // STAMPS END
 	
 	// $count = count($product_order_id);
@@ -96,32 +91,8 @@ if(isset($_POST)){
 	// // Insert Shipping Information
 	// $insertShippingInformation = $SubmitModel->insertShippingInformation($TrackingNumber, $StampsTxID, $postageURL, $ShipDate, $DeliveryDate, $MaxAmount, $return_id);
 
-	// // Loop to product details array and save each to wp_bidi_return_product_info table
-	// for ($x = 0; $x < $count; $x++) {
-
-	// 	$insertProductInformation = $SubmitModel->insertProductInformation($product_name[$x], $product_qty[$x], $product_order_id[$x], $product_item_id[$x], $product_image[$x], $current_date, $return_id, $TrackingNumber);
-
-	// 	$currentProductQuantity = $CustomerOrderObj->getOrderItemQty( $product_order_id[$x], $product_item_id[$x] );
-
-	// 	if($currentProductQuantity > $product_qty[$x]){
-
-	// 		$total = $currentProductQuantity - $product_qty[$x];
-	// 		wc_update_order_item_meta( $product_item_id[$x], '_qty', $total );
-
-	// 	}else if($currentProductQuantity < $product_qty[$x]){
-
-	// 		wc_update_order_item_meta( $product_item_id[$x], '_qty', $product_qty[$x] );
-
-	// 	}else if($currentProductQuantity = $product_qty[$x]){
-
-	// 		$zero = 0;
-	// 		wc_update_order_item_meta( $product_item_id[$x], '_qty', '0' );
-
-	// 	}
-
-	// }
-	$from_email = "murdoc21daddie@gmail.com";
-	clientEmail($from_email, $customerFullName, $TrackingNumber, $postaggeLabelImageUrl, $count, $product_name, $product_qty);
+	// $from_email = "murdoc21daddie@gmail.com";
+	// clientEmail($from_email, $customerFullName, $TrackingNumber, $postaggeLabelImageUrl, $count, $product_name, $product_qty);
 	// /** START SEND EMAIL TO ADMIN **/
 	// adminEmail($TrackingNumber, $from_firstname, $from_lastName, $from_email, $from_phone_number, $from_address, $from_city, $from_postcode, $from_state, $totalQty);
 }
