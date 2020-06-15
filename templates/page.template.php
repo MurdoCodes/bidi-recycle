@@ -122,7 +122,7 @@ use Includes\StampsAPI\Address;
 
 							<div class="form-group">
 							  <label for="sel1">Quantity of Sticks to return :</label>
-							  <select class="form-control" id="sel1" name="bidistick_qty">
+							  <select class="form-control" id="bidistick_qty" name="bidistick_qty">
 							    <option value="0">SELECT</option>
 							    <option value="10">10</option>
 							    <option value="20">20</option>
