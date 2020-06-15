@@ -15,13 +15,8 @@ class Shortcode extends BaseController{
 		if ( is_user_logged_in() ) {
 		   require_once $this->plugin_path . 'templates/page.template.php';	
 		} else {
-		   echo "<h3>Thank you for joining BIDI&#8482; CARES Movement - Please Log In</h3>";
-		   echo "<p>The page requested requires an account login to continue.</p>";
-		   echo "<ul>
-		   	<li><p>If you are new to the Bidi Vapor website,  please register for a <a href='/my-account/'>full access</a> account.</p></li>
-		   	<li><p>If you are an existing <b>full access</b> user, please <a href='/my-account/'>login</a> to gain access to this page.</p></li>
-		   </ul>";
-		  echo "<p>If you are logged in, have a full access account and still cannot access this page, please <a href='/contact-us/'>contact us</a> for assistance.</p></br></br>";
+		   echo "<h3>Thank you for participating in the BIDI&#8482; CARES Movement</h3>";
+		  echo "<p>The Bidi Cares program is where you can return your used and empty Bidi Sticks for recycling and get a FREE coupon code for your FREE Bidi Stick on your next purchase. We require you to log-in for us to verify your age.</p></br></br>";
 		}		
 	}
 }

@@ -33,12 +33,11 @@ class Address {
 class KaivalAddress extends Address {
     public function __construct() {
         Address::__construct(
-            'BIDICARES',
-            'RETURNS',
-            '8630 SW Scholls Ferry Rd Suite 3333',
-            'Beaverton',
-            'Oregon',
-            '97008',
+            'BIDI CARES',
+            '4460 OLD DIXIE HWY',
+            'GRANT',
+            'FLORIDA',
+            '32949-8236',
             '8333672434',
             'support@bidivapor.com'
         );

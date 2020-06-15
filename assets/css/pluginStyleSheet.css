@@ -10,7 +10,7 @@
 
 /* PRODUCT LIST */
 .product-list #buttonModal{height: 3em !important;margin-top: -1% !important;}
-.product-list, .user-details {max-height: 60em !important;height: 60em !important;}
+/*.product-list, .user-details {max-height: 75em !important;height: 75em !important;}*/
 .product-list header{padding:0 !important;display: flex !important;  justify-content: space-between !important;margin-bottom:1em !important;}
 .product-list .content{max-height: 48em !important;height: 48em !important;overflow: scroll !important;overflow-x: hidden !important;padding: 1em !important;}
 .product-list .single-product{margin-bottom:.5em !important;}
@@ -25,7 +25,7 @@
 .product-list .product-qty button:hover{background-color:#bb4646 !important;border-color:#bb4646 !important;color:#fff !important;}
 
 /* USER DETAILS */
-.user-details header{padding:2% !important;display: flex !important;  justify-content: space-between !important;margin-bottom:2em !important;}
+.user-details header{padding:2% !important;display: flex !important;  justify-content: space-between !important;}
 /*.user-details .content{}*/
 .user-details input{
   color:#636363 !important;
@@ -60,6 +60,7 @@
 
 /* MAIL RETURN */
 .mail-return h3{margin: 0 !important;}
+.mail-return header{padding:2% !important;}
 .mail-return p{color:#fff !important;}
 .mail-return input{
   color:#636363 !important;
